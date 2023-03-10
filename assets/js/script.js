@@ -12,12 +12,26 @@ var questionArr = [
 ];
 console.log(questionArr[0].options)
 
-timeLeft = 100;
+timeLeft = 45;
 
 var startButton = document.querySelector('#start-button')
-
+var questionView = document.querySelector('#question-view')
+var timer = document.querySelector('#timer')
 function startTimer(){
-    console.log('started')
+
+    var timeInterval = setInterval(function(){
+        if(timeLeft>0){
+            timer.textContent = timeLeft;
+            timeLeft--;
+            for( var i=0; i<questionArr.length; i++) {
+                questionView.textContent = questionArr[i].question
+            }
+        } else{
+            console.log('boom');
+            clearInterval( timeInterval);
+        }
+
+    },1000)
 }
 
 startButton.addEventListener('click', startTimer)
