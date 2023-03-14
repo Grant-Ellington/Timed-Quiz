@@ -36,6 +36,12 @@ function displayQuestion(){
 questionView.textContent = questionArr[currentQuestion].question
 }
 
+function displayOptions(){
+    for( i = 0; i<=4; i++){
+        option
+    }
+}
+
 
 
 startButton.addEventListener('click', startGame)
