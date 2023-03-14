@@ -10,28 +10,32 @@ var questionArr = [
         answer: 'e'
     }
 ];
-console.log(questionArr[0].options)
 
 timeLeft = 45;
+currentQuestion = 0;
+score = 0;
 
 var startButton = document.querySelector('#start-button')
 var questionView = document.querySelector('#question-view')
-var timer = document.querySelector('#timer')
+var timerView = document.querySelector('#timerView')
+var optionView = document.querySelector('#option-view')
+
+function startGame(){
+    startTimer();
+    displayQuestion();
+    displayOptions();
+}
 function startTimer(){
-
-    var timeInterval = setInterval(function(){
-        if(timeLeft>0){
-            timer.textContent = timeLeft;
-            timeLeft--;
-            for( var i=0; i<questionArr.length; i++) {
-                questionView.textContent = questionArr[i].question
-            }
-        } else{
-            console.log('boom');
-            clearInterval( timeInterval);
-        }
-
+    timer = setInterval(function(){
+        timeLeft--;
+        console.log(timeLeft)
+        timerView.innerHTML = timeLeft
     },1000)
 }
+function displayQuestion(){
+questionView.textContent = questionArr[currentQuestion].question
+}
 
-startButton.addEventListener('click', startTimer)
+
+
+startButton.addEventListener('click', startGame)
