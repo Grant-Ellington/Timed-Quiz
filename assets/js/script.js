@@ -75,7 +75,6 @@ function optionFunction(event){
     } 
     displayQuestion();
     displayOptions();
-    displayHighScore();
 }
 
 function endGame(){
@@ -89,7 +88,6 @@ function endGame(){
     viewScore.appendChild(button2)
     h2El.textContent = 'Your score: '+score;
     button2.textContent = 'Submit';
-    ;
     
 
 }
@@ -109,6 +107,7 @@ function submitFunction(event){
     startButton.disabled = false
     score = 0;
     viewScore.innerHTML = '';
+    displayHighScore();
 }
 
 function displayHighScore(){
