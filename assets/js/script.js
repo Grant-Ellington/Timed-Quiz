@@ -11,30 +11,39 @@ var questionArr = [
     }
 ];
 
-timeLeft = 45;
+timeLeft = 20;
 currentQuestion = 0;
 score = 0;
-highScoreArr = [] //add || for getting the current localstorage array
+highScoreArr = [] || JSON.parse(localStorage.getItem('highScores'));
 
 var startButton = document.querySelector('#start-button')
 var questionView = document.querySelector('#question-view')
 var timerView = document.querySelector('#timerView')
 var optionView = document.querySelector('#option-view')
 var viewScore = document.querySelector('#viewScore')
+var viewHighScore = document.querySelector('#hig-score-view')
+
+var button2 = document.createElement('button')
+var input = document.createElement('input');
+
+function init(){
+    displayHighScore();
+}
 
 function startGame(){
     startTimer();
     displayQuestion();
     displayOptions();
+
 }
 function startTimer(){
     timer = setInterval(function(){
         timeLeft--;
-        console.log(timeLeft)
         timerView.innerHTML = timeLeft
 
-        if(timeLeft < 0){
+        if(timeLeft <= 0){
             endGame();
+            clearInterval(timer);
         }
     },1000)
 }
@@ -65,11 +74,11 @@ function displayOptions(){
     } 
     displayQuestion();
     displayOptions();
+    displayHighScore();
  }
- var button2 = document.createElement('button')
- var input = document.createElement('input');
  
  function endGame(){
+    clearInterval(timer)
     questionView.innerHTML = '';
     var h2El = document.createElement('h2')
     input.setAttribute('placeholder', 'Enter your initials')
@@ -78,6 +87,7 @@ function displayOptions(){
     viewScore.appendChild(button2)
     h2El.textContent = 'Your score: '+score;
     button2.textContent = 'Submit';
+    ;
     
 
  }
@@ -90,9 +100,15 @@ function displayOptions(){
         initials: input.value
     }
     highScoreArr.push(scoreObj)
-    localStorage.setItem("highScores", highScoreArr)
+    localStorage.setItem("highScores", JSON.stringify(highScoreArr))
+ }
+
+ function displayHighScore(){
+    viewHighScore.textContent = localStorage.getItem('highScores')
  }
 
 button2.addEventListener('click', submitFunction)
 optionView.addEventListener('click', optionFunction)
 startButton.addEventListener('click', startGame)
+
+init();
