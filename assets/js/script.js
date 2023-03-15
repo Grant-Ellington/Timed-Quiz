@@ -34,6 +34,7 @@ function startGame(){
     startTimer();
     displayQuestion();
     displayOptions();
+    startButton.disabled = true;
 
 }
 function startTimer(){
@@ -79,6 +80,7 @@ function displayOptions(){
  
  function endGame(){
     clearInterval(timer)
+    
     questionView.innerHTML = '';
     var h2El = document.createElement('h2')
     input.setAttribute('placeholder', 'Enter your initials')
@@ -101,6 +103,12 @@ function displayOptions(){
     }
     highScoreArr.push(scoreObj)
     localStorage.setItem("highScores", JSON.stringify(highScoreArr))
+    
+    timeLeft = 20;
+    currentQuestion = 0;
+    startButton.disabled = false
+    score = 0;
+    viewScore.innerHTML = '';
  }
 
  function displayHighScore(){
