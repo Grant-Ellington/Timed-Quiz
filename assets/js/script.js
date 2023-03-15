@@ -1,10 +1,10 @@
 var questionArr = [
-     question1 = {
+    question1 = {
         question:'This is the first question',
         options: [ 'a','b','c','d'],
         answer: 'a'
     },
-     question2 = {
+    question2 = {
         question:'This is the second question',
         options: [ 'e','f','g','h'],
         answer: 'e'
@@ -60,7 +60,7 @@ function displayOptions(){
     }
 
 }
- function optionFunction(event){
+function optionFunction(event){
     event.preventDefault();
     if(event.target.textContent=== questionArr[currentQuestion].answer){
         score++;
@@ -76,9 +76,9 @@ function displayOptions(){
     displayQuestion();
     displayOptions();
     displayHighScore();
- }
- 
- function endGame(){
+}
+
+function endGame(){
     clearInterval(timer)
     
     questionView.innerHTML = '';
@@ -92,8 +92,8 @@ function displayOptions(){
     ;
     
 
- }
- function submitFunction(event){
+}
+function submitFunction(event){
     event.preventDefault();
 
     input.value
@@ -109,11 +109,11 @@ function displayOptions(){
     startButton.disabled = false
     score = 0;
     viewScore.innerHTML = '';
- }
+}
 
- function displayHighScore(){
+function displayHighScore(){
     viewHighScore.textContent = localStorage.getItem('highScores')
- }
+}
 
 button2.addEventListener('click', submitFunction)
 optionView.addEventListener('click', optionFunction)
