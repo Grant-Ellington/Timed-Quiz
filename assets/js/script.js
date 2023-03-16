@@ -14,7 +14,7 @@ var questionArr = [
 timeLeft = 20;
 currentQuestion = 0;
 score = 0;
-highScoreArr = [] || JSON.parse(localStorage.getItem('highScores'));
+var highScoreArr = JSON.parse(localStorage.getItem('highScores')) || [];
 
 var startButton = document.querySelector('#start-button')
 var questionView = document.querySelector('#question-view')
@@ -22,7 +22,7 @@ var timerView = document.querySelector('#timerView')
 var optionView = document.querySelector('#option-view')
 var viewScore = document.querySelector('#viewScore')
 var viewHighScore = document.querySelector('#hig-score-view')
-
+var highScoresDisplayUl = document.querySelector("#high-scores-display")
 var button2 = document.createElement('button')
 var input = document.createElement('input');
 
@@ -94,11 +94,11 @@ function endGame(){
 function submitFunction(event){
     event.preventDefault();
 
-    input.value
-    var scoreObj={
+    var scoreObj = {
         score : score,
         initials: input.value
     }
+
     highScoreArr.push(scoreObj)
     localStorage.setItem("highScores", JSON.stringify(highScoreArr))
     
@@ -111,7 +111,18 @@ function submitFunction(event){
 }
 
 function displayHighScore(){
-    viewHighScore.textContent = localStorage.getItem('highScores')
+    var highScoresArr = JSON.parse(localStorage.getItem('highScores')); [{}, {}]
+
+    highScoresDisplayUl.innerHTML = ""
+
+    highScoresArr.forEach(function(scoreObj) {
+        var liEl = document.createElement('li');
+
+        liEl.textContent = `${scoreObj.initials}: ${scoreObj.score}`
+
+        highScoresDisplayUl.appendChild(liEl)
+    });
+
 }
 
 button2.addEventListener('click', submitFunction)
