@@ -53,7 +53,7 @@ questionView.textContent = questionArr[currentQuestion].question
 }
 
 function displayOptions(){
-    for( i = 0; i<=4; i++){
+    for( i = 0; i<=questionArr[currentQuestion].options.length; i++){
         var button = document.createElement('button');
         button.textContent = questionArr[currentQuestion].options[i]
         optionView.appendChild(button)
